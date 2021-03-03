@@ -3,27 +3,62 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2017780525D60CC60091F640 /* DayPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2017780425D60CC60091F640 /* DayPickerTableViewController.swift */; };
+		201EF3E725DC93F4000696AF /* DefinitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201EF3E525DC93F4000696AF /* DefinitionTableViewCell.swift */; };
+		201EF3E825DC93F4000696AF /* DefinitionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 201EF3E625DC93F4000696AF /* DefinitionTableViewCell.xib */; };
+		2030236325DDBC3B00557A8C /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2030236225DDBC3B00557A8C /* SearchResultsTableViewController.swift */; };
+		2044FBA825D57F5C00413C13 /* WordOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2044FBA725D57F5C00413C13 /* WordOfTheDay.swift */; };
+		2044FBAB25D5824600413C13 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 2044FBAA25D5824600413C13 /* SwiftyJSON */; };
+		2044FBAE25D5828100413C13 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2044FBAD25D5828100413C13 /* Alamofire */; };
+		2044FBB125D582D700413C13 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2044FBB025D582D700413C13 /* Kingfisher */; };
+		2044FBB425D5A22300413C13 /* SmallWotdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2044FBB225D5A22300413C13 /* SmallWotdTableViewCell.swift */; };
+		2044FBB525D5A22300413C13 /* SmallWotdTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FBB325D5A22300413C13 /* SmallWotdTableViewCell.xib */; };
+		2061595225E95C5B00714D1B /* UITapGestureRecognizerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061595125E95C5B00714D1B /* UITapGestureRecognizerExtension.swift */; };
+		2061595425E9701A00714D1B /* Popovers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2061595325E9701A00714D1B /* Popovers.storyboard */; };
+		2061595625E9712E00714D1B /* FootnoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061595525E9712E00714D1B /* FootnoteViewController.swift */; };
+		2068C41A25EBB9D0004F5157 /* TablePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068C41925EBB9D0004F5157 /* TablePickerViewController.swift */; };
+		207BB60225D84CF3001C27C3 /* DefinitionLookupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207BB60125D84CF3001C27C3 /* DefinitionLookupTableViewController.swift */; };
+		207BB60425D84D93001C27C3 /* DefinitionLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207BB60325D84D93001C27C3 /* DefinitionLookup.swift */; };
 		209CC95025D4A21A00C9075C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CC94F25D4A21A00C9075C /* AppDelegate.swift */; };
 		209CC95225D4A21A00C9075C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CC95125D4A21A00C9075C /* SceneDelegate.swift */; };
-		209CC95425D4A21A00C9075C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CC95325D4A21A00C9075C /* ViewController.swift */; };
+		209CC95425D4A21A00C9075C /* WotdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CC95325D4A21A00C9075C /* WotdVC.swift */; };
 		209CC95725D4A21A00C9075C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209CC95525D4A21A00C9075C /* Main.storyboard */; };
 		209CC95925D4A21B00C9075C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 209CC95825D4A21B00C9075C /* Assets.xcassets */; };
 		209CC95C25D4A21B00C9075C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209CC95A25D4A21B00C9075C /* LaunchScreen.storyboard */; };
+		209CC96725D4A25700C9075C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CC96625D4A25700C9075C /* StringExtension.swift */; };
+		209CC96E25D53D1000C9075C /* WotdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CC96C25D53D1000C9075C /* WotdTableViewCell.swift */; };
+		209CC96F25D53D1000C9075C /* WotdTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209CC96D25D53D1000C9075C /* WotdTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2017780425D60CC60091F640 /* DayPickerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPickerTableViewController.swift; sourceTree = "<group>"; };
+		201EF3E525DC93F4000696AF /* DefinitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionTableViewCell.swift; sourceTree = "<group>"; };
+		201EF3E625DC93F4000696AF /* DefinitionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefinitionTableViewCell.xib; sourceTree = "<group>"; };
+		2030236225DDBC3B00557A8C /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		2044FBA725D57F5C00413C13 /* WordOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordOfTheDay.swift; sourceTree = "<group>"; };
+		2044FBB225D5A22300413C13 /* SmallWotdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWotdTableViewCell.swift; sourceTree = "<group>"; };
+		2044FBB325D5A22300413C13 /* SmallWotdTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallWotdTableViewCell.xib; sourceTree = "<group>"; };
+		2061595125E95C5B00714D1B /* UITapGestureRecognizerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITapGestureRecognizerExtension.swift; sourceTree = "<group>"; };
+		2061595325E9701A00714D1B /* Popovers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Popovers.storyboard; sourceTree = "<group>"; };
+		2061595525E9712E00714D1B /* FootnoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootnoteViewController.swift; sourceTree = "<group>"; };
+		2068C41925EBB9D0004F5157 /* TablePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePickerViewController.swift; sourceTree = "<group>"; };
+		207BB60125D84CF3001C27C3 /* DefinitionLookupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionLookupTableViewController.swift; sourceTree = "<group>"; };
+		207BB60325D84D93001C27C3 /* DefinitionLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionLookup.swift; sourceTree = "<group>"; };
 		209CC94C25D4A21A00C9075C /* Dexy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dexy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		209CC94F25D4A21A00C9075C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		209CC95125D4A21A00C9075C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		209CC95325D4A21A00C9075C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		209CC95325D4A21A00C9075C /* WotdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WotdVC.swift; sourceTree = "<group>"; };
 		209CC95625D4A21A00C9075C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		209CC95825D4A21B00C9075C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		209CC95B25D4A21B00C9075C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		209CC95D25D4A21B00C9075C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		209CC96625D4A25700C9075C /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		209CC96C25D53D1000C9075C /* WotdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WotdTableViewCell.swift; sourceTree = "<group>"; };
+		209CC96D25D53D1000C9075C /* WotdTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WotdTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +66,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2044FBB125D582D700413C13 /* Kingfisher in Frameworks */,
+				2044FBAB25D5824600413C13 /* SwiftyJSON in Frameworks */,
+				2044FBAE25D5828100413C13 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2044FBA625D57F3600413C13 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2044FBA725D57F5C00413C13 /* WordOfTheDay.swift */,
+				207BB60325D84D93001C27C3 /* DefinitionLookup.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2061595725E9714600714D1B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				209CC95325D4A21A00C9075C /* WotdVC.swift */,
+				207BB60125D84CF3001C27C3 /* DefinitionLookupTableViewController.swift */,
+				2017780425D60CC60091F640 /* DayPickerTableViewController.swift */,
+				2061595525E9712E00714D1B /* FootnoteViewController.swift */,
+				2030236225DDBC3B00557A8C /* SearchResultsTableViewController.swift */,
+				2068C41925EBB9D0004F5157 /* TablePickerViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		209CC94325D4A21900C9075C = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +116,41 @@
 		209CC94E25D4A21A00C9075C /* Dexy */ = {
 			isa = PBXGroup;
 			children = (
+				2044FBA625D57F3600413C13 /* Model */,
+				209CC96A25D53CA500C9075C /* Cells */,
+				209CC96425D4A22500C9075C /* Extensions */,
 				209CC94F25D4A21A00C9075C /* AppDelegate.swift */,
 				209CC95125D4A21A00C9075C /* SceneDelegate.swift */,
-				209CC95325D4A21A00C9075C /* ViewController.swift */,
+				2061595725E9714600714D1B /* View Controllers */,
 				209CC95525D4A21A00C9075C /* Main.storyboard */,
+				2061595325E9701A00714D1B /* Popovers.storyboard */,
 				209CC95825D4A21B00C9075C /* Assets.xcassets */,
 				209CC95A25D4A21B00C9075C /* LaunchScreen.storyboard */,
 				209CC95D25D4A21B00C9075C /* Info.plist */,
 			);
 			path = Dexy;
+			sourceTree = "<group>";
+		};
+		209CC96425D4A22500C9075C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				209CC96625D4A25700C9075C /* StringExtension.swift */,
+				2061595125E95C5B00714D1B /* UITapGestureRecognizerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		209CC96A25D53CA500C9075C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				209CC96C25D53D1000C9075C /* WotdTableViewCell.swift */,
+				209CC96D25D53D1000C9075C /* WotdTableViewCell.xib */,
+				2044FBB225D5A22300413C13 /* SmallWotdTableViewCell.swift */,
+				2044FBB325D5A22300413C13 /* SmallWotdTableViewCell.xib */,
+				201EF3E525DC93F4000696AF /* DefinitionTableViewCell.swift */,
+				201EF3E625DC93F4000696AF /* DefinitionTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +169,11 @@
 			dependencies = (
 			);
 			name = Dexy;
+			packageProductDependencies = (
+				2044FBAA25D5824600413C13 /* SwiftyJSON */,
+				2044FBAD25D5828100413C13 /* Alamofire */,
+				2044FBB025D582D700413C13 /* Kingfisher */,
+			);
 			productName = Dexy;
 			productReference = 209CC94C25D4A21A00C9075C /* Dexy.app */;
 			productType = "com.apple.product-type.application";
@@ -110,6 +201,11 @@
 				Base,
 			);
 			mainGroup = 209CC94325D4A21900C9075C;
+			packageReferences = (
+				2044FBA925D5824600413C13 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				2044FBAC25D5828100413C13 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2044FBAF25D582D700413C13 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 209CC94D25D4A21A00C9075C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -124,9 +220,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201EF3E825DC93F4000696AF /* DefinitionTableViewCell.xib in Resources */,
 				209CC95C25D4A21B00C9075C /* LaunchScreen.storyboard in Resources */,
 				209CC95925D4A21B00C9075C /* Assets.xcassets in Resources */,
 				209CC95725D4A21A00C9075C /* Main.storyboard in Resources */,
+				2061595425E9701A00714D1B /* Popovers.storyboard in Resources */,
+				2044FBB525D5A22300413C13 /* SmallWotdTableViewCell.xib in Resources */,
+				209CC96F25D53D1000C9075C /* WotdTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,9 +237,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				209CC95425D4A21A00C9075C /* ViewController.swift in Sources */,
+				2017780525D60CC60091F640 /* DayPickerTableViewController.swift in Sources */,
+				209CC96725D4A25700C9075C /* StringExtension.swift in Sources */,
+				207BB60425D84D93001C27C3 /* DefinitionLookup.swift in Sources */,
+				2044FBA825D57F5C00413C13 /* WordOfTheDay.swift in Sources */,
+				209CC95425D4A21A00C9075C /* WotdVC.swift in Sources */,
+				201EF3E725DC93F4000696AF /* DefinitionTableViewCell.swift in Sources */,
+				2061595225E95C5B00714D1B /* UITapGestureRecognizerExtension.swift in Sources */,
+				209CC96E25D53D1000C9075C /* WotdTableViewCell.swift in Sources */,
 				209CC95025D4A21A00C9075C /* AppDelegate.swift in Sources */,
+				2030236325DDBC3B00557A8C /* SearchResultsTableViewController.swift in Sources */,
+				2061595625E9712E00714D1B /* FootnoteViewController.swift in Sources */,
 				209CC95225D4A21A00C9075C /* SceneDelegate.swift in Sources */,
+				2044FBB425D5A22300413C13 /* SmallWotdTableViewCell.swift in Sources */,
+				2068C41A25EBB9D0004F5157 /* TablePickerViewController.swift in Sources */,
+				207BB60225D84CF3001C27C3 /* DefinitionLookupTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +453,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2044FBA925D5824600413C13 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		2044FBAC25D5828100413C13 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+		2044FBAF25D582D700413C13 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2044FBAA25D5824600413C13 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2044FBA925D5824600413C13 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		2044FBAD25D5828100413C13 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2044FBAC25D5828100413C13 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		2044FBB025D582D700413C13 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2044FBAF25D582D700413C13 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 209CC94425D4A21900C9075C /* Project object */;
 }

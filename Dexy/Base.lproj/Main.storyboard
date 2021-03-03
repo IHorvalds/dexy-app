@@ -1,24 +1,209 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18121" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1x4-uF-oqR">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18091"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Cuvîntul zilei-->
+        <scene sceneID="mt5-Oi-Gvu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableViewController id="Gmo-gA-LNf" customClass="WotdVC" customModule="Dexy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="exe-vl-tbh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wotdcell" rowHeight="441" id="0cw-Ta-U5k" customClass="WotdTableViewCell" customModule="Dexy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="49.5" width="414" height="441"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0cw-Ta-U5k" id="gP2-MF-Nng">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="441"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="smallwotdcell" id="aSG-s5-uxC">
+                                <rect key="frame" x="0.0" y="490.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aSG-s5-uxC" id="L0c-9J-X9Y">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Gmo-gA-LNf" id="wNo-q8-mKm"/>
+                            <outlet property="delegate" destination="Gmo-gA-LNf" id="X8s-bJ-dNB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Cuvîntul zilei" id="mMz-ab-xgP">
+                        <barButtonItem key="rightBarButtonItem" title="Schimba data" image="calendar" catalog="system" id="omi-Ic-sa5">
+                            <color key="tintColor" name="AccentColor"/>
+                            <connections>
+                                <segue destination="pSr-fn-nAm" kind="popoverPresentation" identifier="showdaypickersegue" popoverAnchorBarButtonItem="omi-Ic-sa5" id="2rA-b2-SKJ">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jO5-C6-Y97" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-630" y="1734"/>
+        </scene>
+        <!--Day Picker View Controller-->
+        <scene sceneID="Eaa-aA-38b">
+            <objects>
+                <viewController id="pSr-fn-nAm" customClass="DayPickerViewController" customModule="Dexy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CQx-Qq-1BA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="1ze-vg-hKF">
+                                <rect key="frame" x="4.5" y="228" width="405" height="352"/>
+                                <color key="tintColor" name="AccentColor"/>
+                                <locale key="locale" localeIdentifier="ro"/>
+                            </datePicker>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eup-Ze-qnV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="NXy-Ws-LET">
+                                        <connections>
+                                            <action selector="cancel:" destination="pSr-fn-nAm" id="1P4-ir-SgH"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="snd-qW-Ekr"/>
+                                    <barButtonItem systemItem="done" id="lhH-Ec-x4c">
+                                        <connections>
+                                            <action selector="doneButton:" destination="pSr-fn-nAm" id="HFa-en-v9q"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mz4-Ts-xG4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1ze-vg-hKF" firstAttribute="centerY" secondItem="mz4-Ts-xG4" secondAttribute="centerY" id="GL2-xt-b8g"/>
+                            <constraint firstItem="Eup-Ze-qnV" firstAttribute="width" secondItem="CQx-Qq-1BA" secondAttribute="width" id="Kzf-ON-Ynw"/>
+                            <constraint firstItem="Eup-Ze-qnV" firstAttribute="top" secondItem="mz4-Ts-xG4" secondAttribute="top" id="Rif-nt-vJa"/>
+                            <constraint firstItem="1ze-vg-hKF" firstAttribute="centerX" secondItem="mz4-Ts-xG4" secondAttribute="centerX" id="alT-fc-YFA"/>
+                            <constraint firstItem="Eup-Ze-qnV" firstAttribute="centerX" secondItem="mz4-Ts-xG4" secondAttribute="centerX" id="u73-LH-RLl"/>
+                            <constraint firstItem="1ze-vg-hKF" firstAttribute="width" secondItem="CQx-Qq-1BA" secondAttribute="width" multiplier="0.978261" id="yjo-zd-646"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="1ze-vg-hKF" id="eUA-2g-pbx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F7n-b6-vc0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-630" y="2523"/>
+        </scene>
+        <!--Cuvîntul zilei-->
+        <scene sceneID="pW8-s5-IXC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Ai-k7-erj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Cuvîntul zilei" image="highlighter" catalog="system" selectedImage="highlighter" id="LIf-AF-Woi">
+                        <color key="badgeColor" name="AccentColor"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="kwk-Wx-pim">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Gmo-gA-LNf" kind="relationship" relationship="rootViewController" id="QW9-7B-rxy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XTj-Ry-o5a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-629" y="943"/>
+        </scene>
+        <!--Definiții-->
+        <scene sceneID="hu8-XM-pz3">
+            <objects>
+                <tableViewController id="u64-h2-zPq" customClass="DefinitionLookupTableViewController" customModule="Dexy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="gZk-Ap-Gy3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="definitioncell" id="1Pc-vk-bUe">
+                                <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Pc-vk-bUe" id="Cbv-LW-7Ky">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="u64-h2-zPq" id="MzL-EH-lMZ"/>
+                            <outlet property="delegate" destination="u64-h2-zPq" id="EUj-GC-Jzn"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Definiții" id="tcd-2I-E9R"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zbj-ge-EzK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="554" y="1734"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="iIc-GW-8Ys">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="1x4-uF-oqR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="555-Op-pJe">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="2Ai-k7-erj" kind="relationship" relationship="viewControllers" id="sTm-cr-ARa"/>
+                        <segue destination="J5m-qd-8xM" kind="relationship" relationship="viewControllers" id="9S2-oZ-bVx"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GQh-Wy-T7W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-184.05797101449278" y="73.660714285714278"/>
+        </scene>
+        <!--Definiții-->
+        <scene sceneID="qKN-er-pGw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J5m-qd-8xM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Definiții" image="book" catalog="system" selectedImage="book" id="xQM-WU-iGz">
+                        <color key="badgeColor" name="AccentColor"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="WaG-4B-PtH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="u64-h2-zPq" kind="relationship" relationship="rootViewController" id="S46-iW-8gW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XfQ-Tq-Kfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="554" y="943"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="book" catalog="system" width="128" height="102"/>
+        <image name="calendar" catalog="system" width="128" height="106"/>
+        <image name="highlighter" catalog="system" width="128" height="119"/>
+        <namedColor name="AccentColor">
+            <color red="0.6380000114440918" green="0.20000000298023224" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
