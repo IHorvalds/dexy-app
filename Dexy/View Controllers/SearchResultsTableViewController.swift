@@ -20,10 +20,6 @@ class SearchResultsTableViewController: UITableViewController {
     
     weak var delegate: SearchResultsDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,7 +35,7 @@ class SearchResultsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : searchResults.count
+        return section == 0 ? 1 : (searchResults.count + 1)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,9 +44,15 @@ class SearchResultsTableViewController: UITableViewController {
             cell.textLabel?.text = DefinitionLookup.dictionaryName(url: self.dictionary ?? "")
             cell.accessoryType = .disclosureIndicator
         } else {
-            cell.textLabel?.text = searchResults[indexPath.row]
-            cell.textLabel?.textColor = .systemBlue
-            cell.accessoryType = .disclosureIndicator
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "\"\(searchTerm ?? "")\""
+                cell.textLabel?.textColor = UIColor(named: "AccentColor")
+                cell.accessoryView = UIImageView(image: UIImage(systemName: "circle.fill")?.withTintColor(UIColor(named: "AccentColor")!))
+            } else {
+                cell.textLabel?.text = searchResults[indexPath.row - 1]
+                cell.textLabel?.textColor = .systemBlue
+                cell.accessoryType = .disclosureIndicator
+            }
         }
         return cell
     }
@@ -71,8 +73,14 @@ class SearchResultsTableViewController: UITableViewController {
             
             self.show(navController, sender: self)
         } else {
-            searchTerm = searchResults[indexPath.row]
-            delegate?.didSelectWord(word: searchResults[indexPath.row])
+            if indexPath.row == 0,
+               let searchTerm = self.searchTerm,
+               !searchTerm.isEmpty {
+                delegate?.didSelectWord(word: searchTerm)
+            } else {
+                searchTerm = searchResults[indexPath.row - 1]
+                delegate?.didSelectWord(word: searchResults[indexPath.row - 1])
+            }
         }
     }
 

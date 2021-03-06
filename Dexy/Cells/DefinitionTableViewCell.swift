@@ -19,36 +19,31 @@ class DefinitionTableViewCell: UITableViewCell {
     
     public var def: DefinitionLookup.Definition? {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            if let def = self.def {
                 
-                if let def = self.def {
-                    
-                    self.textView.attributedText = def.formattedDefinition
-                    
-                    let fieldAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10.0, weight: .regular),
-                                     NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel]
-                    
-                    let valueAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10.0, weight: .semibold),
-                                     NSAttributedString.Key.foregroundColor: UIColor.label]
-                    
-                    // source
-                    let source = NSMutableAttributedString(string: "Sursa: ", attributes: fieldAttr)
-                    let sourceName = NSAttributedString(string: def.sourceName, attributes: valueAttr)
-                    source.append(sourceName)
-                    self.sourceLabel.attributedText = source
-                    
-                    // user
-                    let addedBy = NSMutableAttributedString(string: "Adăugată de ", attributes: fieldAttr)
-                    let userNick = NSAttributedString(string: def.userNick, attributes: valueAttr)
-                    addedBy.append(userNick)
-                    self.addedByLabel.attributedText = addedBy
-                    
-                } else {
-                    self.textView.text = ""
-                    self.addedByLabel.text = ""
-                    self.sourceLabel.text = ""
-                }
+                self.textView.attributedText = def.formattedDefinition
+                
+                let fieldAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10.0, weight: .regular),
+                                 NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel]
+                
+                let valueAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10.0, weight: .semibold),
+                                 NSAttributedString.Key.foregroundColor: UIColor.label]
+                
+                // source
+                let source = NSMutableAttributedString(string: "Sursa: ", attributes: fieldAttr)
+                let sourceName = NSAttributedString(string: def.sourceName, attributes: valueAttr)
+                source.append(sourceName)
+                self.sourceLabel.attributedText = source
+                
+                // user
+                let addedBy = NSMutableAttributedString(string: "Adăugată de ", attributes: fieldAttr)
+                let userNick = NSAttributedString(string: def.userNick, attributes: valueAttr)
+                addedBy.append(userNick)
+                self.addedByLabel.attributedText = addedBy
+            } else {
+                self.textView.text = ""
+                self.addedByLabel.text = ""
+                self.sourceLabel.text = ""
             }
         }
     }
@@ -59,7 +54,7 @@ class DefinitionTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         tapGR.addTarget(self, action: #selector(openPopover(_:)))
         self.textView.addGestureRecognizer(tapGR)
     }

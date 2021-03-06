@@ -22,14 +22,46 @@ class DefinitionLookupTableViewController: UITableViewController, DefinitionCell
     var searchController: UISearchController!
     
     let activityIndicator = UIActivityIndicatorView(style: .medium)
+    let noResultsLabel = UILabel()
+    
+    
+    var dataSource: TableDiffableDataSource<Int, DefinitionLookup.Definition>! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: "DefinitionTableViewCell", bundle: nil), forCellReuseIdentifier: "definitioncell")
+        
+        setupNoResultsLabel()
+        
+        setupDataSource()
         setupSearchBar()
         setupActivityIndicator()
         update()
+    }
+    
+    fileprivate func setupDataSource() {
+        dataSource = TableDiffableDataSource<Int, DefinitionLookup.Definition>(tableView: tableView, cellProvider: { [weak self] tbv, indx, def in
+            guard let self = self else { return UITableViewCell() }
+            
+            return self.ConfigureCell(tableView: tbv, index: indx, definition: def)
+        })
+        
+        self.dataSource.defaultRowAnimation = .fade
+        self.dataSource.titles = TitleForSection
+    }
+    
+    fileprivate func TitleForSection(section: Int) -> String {
+        return dictionary ?? ""
+    }
+    
+    fileprivate func ConfigureCell(tableView: UITableView, index: IndexPath, definition: DefinitionLookup.Definition) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "definitioncell", for: index) as! DefinitionTableViewCell
+        
+        cell.def = definition
+        cell.delegate = self
+  
+        return cell
     }
     
     fileprivate func setupSearchBar() {
@@ -51,8 +83,30 @@ class DefinitionLookupTableViewController: UITableViewController, DefinitionCell
         activityIndicator.hidesWhenStopped = true
     }
     
+    fileprivate func setupNoResultsLabel() {
+        self.noResultsLabel.text = "Niciun rezultat"
+        self.noResultsLabel.font = .systemFont(ofSize: 32.0)
+        self.tableView.addSubview(noResultsLabel)
+        
+        self.noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.noResultsLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.noResultsLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        self.noResultsLabel.isHidden = true
+    }
+    
+    fileprivate func showNoResultsLabel() {
+        noResultsLabel.isHidden = false
+    }
+    
+    fileprivate func hideNoResultsLabel() {
+        noResultsLabel.isHidden = true
+    }
+    
     fileprivate func update() {
         guard let searchTerm = searchTerm else { return }
+        
+        hideNoResultsLabel()
+        
         let newUrl = url.replacingOccurrences(of: "##WORD##", with: searchTerm.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchTerm)
                         .replacingOccurrences(of: "##DICT##", with: (self.dictionary != nil && !self.dictionary!.isEmpty) ? "-\(self.dictionary!)" : "")
         
@@ -68,8 +122,22 @@ class DefinitionLookupTableViewController: UITableViewController, DefinitionCell
                         guard let self = self else { return }
                         
                         self.definition = definition
-                        self.tableView.reloadData()
+                        
+                        var snapshot = NSDiffableDataSourceSnapshot<Int, DefinitionLookup.Definition>()
+                        snapshot.appendSections([0])
+                        snapshot.appendItems(definition.definitions)
+                        
+                        self.dataSource.apply(snapshot, animatingDifferences: true)
+                        
                         self.activityIndicator.stopAnimating()
+                        
+                        if definition.definitions.count == 0 {
+                            self.showNoResultsLabel()
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showNoResultsLabel()
                     }
                 }
             case .failure(let error):
@@ -108,42 +176,6 @@ class DefinitionLookupTableViewController: UITableViewController, DefinitionCell
     private func checkConnectivity() -> Bool {
         NetworkReachabilityManager.default?.isReachable ?? false
     }
-
-    // MARK: - Table view data source
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return DefinitionLookup.dictionaryName(url: self.dictionary ?? "")
-        } else {
-            return ""
-        }
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return (definition != nil) ? 1 : 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return definition?.definitions.count ?? 0
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "definitioncell", for: indexPath) as! DefinitionTableViewCell
-
-        if let definition = definition {
-            
-            cell.def = definition.definitions[indexPath.row]
-            cell.delegate = self 
-        } else {
-            cell.def = nil
-        }
-
-        return cell
-    }
     
     func openPopover(sourceView: UIView, sourceRect: CGRect, footnote: String) {
         let footnoteVC = UIStoryboard(name: "Popovers", bundle: nil).instantiateViewController(identifier: "footnoteviewcontroller") as! FootnoteViewController
@@ -170,7 +202,9 @@ extension DefinitionLookupTableViewController: UISearchResultsUpdating, UISearch
         
         if let searchTerm = searchController.searchBar.text {
             
-            let newUrl = searchUrl.replacingOccurrences(of: "##SEARCH##", with: searchTerm)
+            self.searchTerm = searchTerm
+            
+            let newUrl = searchUrl.replacingOccurrences(of: "##SEARCH##", with: searchTerm.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchTerm)
             activityIndicator.startAnimating()
             AF.request(newUrl).responseJSON { [weak self] response in
                 guard let self = self else { return }
@@ -179,6 +213,7 @@ extension DefinitionLookupTableViewController: UISearchResultsUpdating, UISearch
                 switch response.result {
                 case .success(let json):
                     if let results = json as? Array<String> {
+                        self.resultsController.searchTerm = self.searchTerm
                         self.resultsController.searchResults = results
                         self.resultsController.tableView.reloadData()
                     }
@@ -193,6 +228,7 @@ extension DefinitionLookupTableViewController: UISearchResultsUpdating, UISearch
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         resignFirstResponder()
+        didSelectWord(word: self.resultsController.searchTerm ?? "")
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

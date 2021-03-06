@@ -114,6 +114,7 @@ extension String {
                 
                 let imageString = NSMutableAttributedString(string: " ")
                 imageString.append(NSAttributedString(attachment: attachment))
+                imageString.append(NSAttributedString(string: " "))
                 
                 
                 let range = Range(matchRange, in: toFormat.string)!
@@ -141,7 +142,7 @@ extension String {
         toFormat.enumerateAttribute(.attachment, in: NSMakeRange(0, toFormat.length),
                                     options: .longestEffectiveRangeNotRequired) { value, range, _ in
             if value != nil {
-                let newRange = NSRange(location: range.location-1, length: 3)
+                let newRange = NSRange(location: range.location-2, length: 4)
                 foundFootnotes[newRange] = notes[index]
                 index += 1
             }

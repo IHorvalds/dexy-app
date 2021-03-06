@@ -27,7 +27,7 @@ class TablePickerViewController: UITableViewController, UISearchResultsUpdating,
     public weak var delegate: TablePickerDelegate?
     
     var searchController: UISearchController!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         assert(options.count == labels.count, "Different numbers of options and labels.")
@@ -43,6 +43,14 @@ class TablePickerViewController: UITableViewController, UISearchResultsUpdating,
         searchController.searchBar.autocapitalizationType = .none
         navigationItem.searchController = searchController
         definesPresentationContext = false
+        
+        
+        setupRightButton()
+    }
+    
+    fileprivate func setupRightButton() {
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(SelectedAnItem))
+        self.navigationItem.rightBarButtonItem = doneButton
     }
 
     // MARK: - Table view data source
@@ -73,9 +81,19 @@ class TablePickerViewController: UITableViewController, UISearchResultsUpdating,
         selectedIndex = indexPath
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         
-        delegate?.didSelectItem(item: filteredOptions[indexPath.row] as Any)
-        
-        self.dismiss(animated: true, completion: nil)
+        if searchController.isActive {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @objc fileprivate func SelectedAnItem() {
+        if let selectedIndex = selectedIndex {
+            delegate?.didSelectItem(item: filteredOptions[selectedIndex.row] as Any)
+            
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
 }

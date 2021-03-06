@@ -17,6 +17,14 @@ class WotdVC: UITableViewController {
     
     private let dateFormatter = DateFormatter()
     
+    // MARK: - DiffableDataSource
+    private enum Section {
+        case selected
+        case others
+    }
+    
+    private var dataSource: TableDiffableDataSource<Section, AnyHashable>! = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +33,52 @@ class WotdVC: UITableViewController {
         tableView.register(UINib(nibName: "WotdTableViewCell", bundle: nil), forCellReuseIdentifier: "wotdcell")
         tableView.register(UINib(nibName: "SmallWotdTableViewCell", bundle: nil), forCellReuseIdentifier: "smallwotdcell")
         
+        setupDataSource()
+        tableView.delegate = self
         update()
+    }
+    
+    fileprivate func setupDataSource() {
+        dataSource = TableDiffableDataSource<Section, AnyHashable>(tableView: tableView, cellProvider: { [weak self] tbv, indx, wotd in
+            guard let self = self else { return UITableViewCell() }
+            
+            return self.ConfigureCell(tableView: tbv, index: indx, wordOfTheDay: wotd)
+        })
+        
+        self.dataSource.titles = TitleForHeader
+        
+        self.dataSource.defaultRowAnimation = .fade
+    }
+    
+    fileprivate func TitleForHeader(section: Int) -> String {
+        if section == 0 {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            return "Cuvîntul zilei \(dateFormatter.string(from: self.date))"
+        } else {
+            return "Cuvinte din alți ani"
+        }
+    }
+    
+    fileprivate func ConfigureCell(tableView: UITableView, index: IndexPath, wordOfTheDay wotd: AnyHashable) -> UITableViewCell {
+        if index.section == 0,
+           let wotd = wotd as? WordOfTheDay {
+            let wotdCell: WotdTableViewCell = tableView.dequeueReusableCell(withIdentifier: "wotdcell") as! WotdTableViewCell
+            
+            wotdCell.wotd = wotd
+            
+            return wotdCell
+        } else {
+            let smallWotdCell: SmallWotdTableViewCell = tableView.dequeueReusableCell(withIdentifier: "smallwotdcell") as! SmallWotdTableViewCell
+            
+            if let wotd = wotd as? WordOfTheDay.SmallWordOfTheDay {
+                smallWotdCell.otherWotd = wotd
+            } else {
+                smallWotdCell.otherWotd = nil
+            }
+            
+            return smallWotdCell
+        }
     }
     
     private func update() {
@@ -43,7 +96,14 @@ class WotdVC: UITableViewController {
                             guard let self = self else { return }
                             
                             self.wordOfTheDay = wotd
-                            self.tableView.reloadData()
+                            var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+                            
+                            snapshot.appendSections([.selected, .others])
+                            snapshot.appendItems([wotd], toSection: .selected)
+                            snapshot.appendItems(wotd.others, toSection: .others)
+                            
+                            self.dataSource.apply(snapshot, animatingDifferences: true)
+                            snapshot.reloadSections([.selected])
                         }
                     }
                 case .failure(let error):
@@ -85,10 +145,6 @@ class WotdVC: UITableViewController {
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return (wordOfTheDay?.others.count ?? 0 > 0) ? 2 : 1
-    }
-    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             let dateFormatter = DateFormatter()
@@ -96,119 +152,6 @@ class WotdVC: UITableViewController {
             return "Cuvîntul zilei \(dateFormatter.string(from: self.date))"
         } else {
             return "Cuvinte din alți ani"
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return wordOfTheDay?.others.count ?? 0
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 550.0
-        }
-        
-        return 120.0
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let wotdCell: WotdTableViewCell = tableView.dequeueReusableCell(withIdentifier: "wotdcell") as! WotdTableViewCell
-            
-            if let wotd = wordOfTheDay {
-                
-                // image
-                let url = URL(string: wotd.imageUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
-                
-                wotdCell.wotdImage.kf.indicatorType = .activity
-                wotdCell.wotdImage.kf.setImage(
-                    with: url,
-                    placeholder: UIImage(systemName: "rectangle.and.pencil.and.ellipsis"),
-                    options: [
-                        .scaleFactor(UIScreen.main.scale),
-                        .transition(.fade(1)),
-                        .cacheOriginalImage
-                    ])
-                
-                // copyright label
-                let fieldAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10.0, weight: .regular),
-                            NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel]
-                
-                let valueAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10.0, weight: .semibold),
-                                  NSAttributedString.Key.foregroundColor: UIColor.label]
-                
-                let copyright = NSMutableAttributedString(string: "© imagine: ", attributes: fieldAttr)
-                let authorName = NSAttributedString(string: wotd.imageAuthor, attributes: valueAttr)
-                copyright.append(authorName)
-                wotdCell.copyrightLabel.attributedText = copyright
-                
-                // definition
-                wotdCell.defTextView.attributedText = wotd.formattedDefinition
-                
-                // source
-                let source = NSMutableAttributedString(string: "Sursa: ", attributes: fieldAttr)
-                let sourceName = NSAttributedString(string: wotd.sourceName, attributes: valueAttr)
-                source.append(sourceName)
-                wotdCell.sourceLabel.attributedText = source
-                
-                // user
-                let addedBy = NSMutableAttributedString(string: "Adăugată de ", attributes: fieldAttr)
-                let userNick = NSAttributedString(string: wotd.userNick, attributes: valueAttr)
-                addedBy.append(userNick)
-                wotdCell.userLabel.attributedText = addedBy
-                
-                // reason
-                wotdCell.reasonTextView.attributedText = wotd.formattedReason
-                
-            }
-            
-            return wotdCell
-        } else {
-            let smallWotdCell: SmallWotdTableViewCell = tableView.dequeueReusableCell(withIdentifier: "smallwotdcell") as! SmallWotdTableViewCell
-            
-            if let current = wordOfTheDay {
-                
-                let wotd = current.others[indexPath.row]
-                
-                let url = URL(string: wotd.imageUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
-                
-                smallWotdCell.wotdImage.kf.indicatorType = .activity
-                smallWotdCell.wotdImage.kf.setImage(
-                    with: url,
-                    placeholder: UIImage(systemName: "rectangle.and.pencil.and.ellipsis"),
-                    options: [
-                        .scaleFactor(UIScreen.main.scale),
-                        .transition(.fade(1)),
-                        .cacheOriginalImage
-                    ])
-                
-                let dateAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10.0, weight: .regular),
-                                NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel]
-                
-                let valueAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10.0, weight: .semibold),
-                                 NSAttributedString.Key.foregroundColor: UIColor.label]
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .medium
-                
-                let dateString = NSMutableAttributedString(string: dateFormatter.string(from: wotd.date) + " ", attributes: dateAttr)
-                let wordString = NSAttributedString(string: wotd.word, attributes: valueAttr)
-                dateString.append(wordString)
-                smallWotdCell.wordLabel.attributedText = dateString
-                
-                // reason
-                smallWotdCell.reasonTextView.attributedText = wotd.formattedReason
-            }
-            
-            return smallWotdCell
         }
     }
 

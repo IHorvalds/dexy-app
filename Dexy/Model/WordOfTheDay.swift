@@ -15,12 +15,21 @@ import UIKit
 ///
 /// • The `reason` property can sometimes be an HTML string. Format accordingly.
 ///
-class WordOfTheDay: Identifiable {
+class WordOfTheDay: Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
+    
+    static func == (lhs: WordOfTheDay, rhs: WordOfTheDay) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     
     static let calendar = Calendar(identifier: .gregorian)
     static let timeZone = TimeZone(abbreviation: "EET")
     
-    struct SmallWordOfTheDay: Identifiable {
+    struct SmallWordOfTheDay: Hashable {
         let id: UUID
         let word: String
         let date: Date
@@ -55,7 +64,7 @@ class WordOfTheDay: Identifiable {
             
             if let jsonReason = json["reason"].string {
                 self.reason = jsonReason
-                self.formattedReason = jsonReason.html2AttributedString(font: .systemFont(ofSize: 16.0)) ?? NSAttributedString(string: jsonReason, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0), .foregroundColor: UIColor.label])
+                self.formattedReason = jsonReason.html2AttributedString(font: .systemFont(ofSize: 16.0)) ?? NSAttributedString(string: jsonReason, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0), .foregroundColor: UIColor.white])
             } else {
                 return nil
             }
@@ -73,6 +82,11 @@ class WordOfTheDay: Identifiable {
             }
             
             self.id = UUID()
+        }
+        
+        
+        static func == (lhs: WordOfTheDay.SmallWordOfTheDay, rhs: WordOfTheDay.SmallWordOfTheDay) -> Bool {
+            return lhs.id == rhs.id
         }
     }
     

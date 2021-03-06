@@ -13,24 +13,23 @@
         <scene sceneID="mt5-Oi-Gvu">
             <objects>
                 <tableViewController id="Gmo-gA-LNf" customClass="WotdVC" customModule="Dexy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="exe-vl-tbh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="exe-vl-tbh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wotdcell" rowHeight="441" id="0cw-Ta-U5k" customClass="WotdTableViewCell" customModule="Dexy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="414" height="441"/>
+                                <rect key="frame" x="20" y="49.5" width="374" height="441"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0cw-Ta-U5k" id="gP2-MF-Nng">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="441"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="441"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="smallwotdcell" id="aSG-s5-uxC">
-                                <rect key="frame" x="0.0" y="490.5" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="490.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aSG-s5-uxC" id="L0c-9J-X9Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -83,6 +82,7 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="tintColor" name="AccentColor"/>
                             </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mz4-Ts-xG4"/>
@@ -129,16 +129,15 @@
         <scene sceneID="hu8-XM-pz3">
             <objects>
                 <tableViewController id="u64-h2-zPq" customClass="DefinitionLookupTableViewController" customModule="Dexy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="gZk-Ap-Gy3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="gZk-Ap-Gy3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="definitioncell" id="1Pc-vk-bUe">
-                                <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Pc-vk-bUe" id="Cbv-LW-7Ky">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -165,8 +164,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="2Ai-k7-erj" kind="relationship" relationship="viewControllers" id="sTm-cr-ARa"/>
                         <segue destination="J5m-qd-8xM" kind="relationship" relationship="viewControllers" id="9S2-oZ-bVx"/>
+                        <segue destination="2Ai-k7-erj" kind="relationship" relationship="viewControllers" id="sTm-cr-ARa"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQh-Wy-T7W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

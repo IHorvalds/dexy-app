@@ -8,9 +8,9 @@
 import SwiftyJSON
 import UIKit
 
-class DefinitionLookup: Identifiable {
+class DefinitionLookup {
     
-    struct Definition: Identifiable {
+    struct Definition: Hashable {
         let id: Int
         private let internalRep: String
         let formattedDefinition: NSAttributedString
